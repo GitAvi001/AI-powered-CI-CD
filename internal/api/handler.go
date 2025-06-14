@@ -1,9 +1,9 @@
 package api
 
-//Creates a simple REST API to serve applications
 import (
 	"encoding/json"
 	"net/http"
+	"github.com/sjwhitworth/golearn/base"
 	"github.com/GitAvi001/AI-powered-CI-CD/internal/model"
 )
 
@@ -16,8 +16,16 @@ func NewHandler(m *model.Model) *Handler {
 }
 
 func (h *Handler) PredictHandler(w http.ResponseWriter, r *http.Request) {
-	// Placeholder for prediction input (simplified for demo)
+	// Create a new DenseInstances (placeholder, replace with real preprocessing)
+	instance := base.NewDenseInstances()
+	// TODO: Add logic to populate instance with input data (e.g., from request body)
+
 	w.Header().Set("Content-Type", "application/json")
-	response := map[string]string{"prediction": "Iris-setosa"} // Mock prediction
+	prediction, err := h.Model.Predict(instance)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	response := map[string]string{"prediction": prediction}
 	json.NewEncoder(w).Encode(response)
 }

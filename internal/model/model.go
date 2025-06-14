@@ -1,9 +1,9 @@
 package model
 
 import (
+	"github.com/GitAvi001/AI-powered-CI-CD/internal/data"
 	"github.com/sjwhitworth/golearn/base"
 	"github.com/sjwhitworth/golearn/knn"
-	"github.com/GitAvi001/AI-powered-CI-CD/internal/data"
 )
 
 // Model represents the AI model.
@@ -31,8 +31,8 @@ func (m *Model) Predict(instance *base.DenseInstances) (string, error) {
 		// Get the class attribute index
 		classAttr := pred.AllClassAttributes()[0]
 		// Get the predicted class label for the first row (index 0)
-		prediction := pred.GetString(0, classAttr)
-		if prediction != "" {
+		prediction, ok := pred.Get(0, classAttr).(string)
+		if ok && prediction != "" {
 			return prediction, nil
 		}
 	}
