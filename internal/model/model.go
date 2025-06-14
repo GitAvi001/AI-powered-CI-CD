@@ -27,5 +27,14 @@ func (m *Model) Predict(instance *base.DenseInstances) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return pred.String(), nil
+	if pred != nil {
+		// Get the class attribute index
+		classAttr := pred.AllClassAttributes()[0]
+		// Get the predicted class label for the first row (index 0)
+		prediction := pred.GetString(0, classAttr)
+		if prediction != "" {
+			return prediction, nil
+		}
+	}
+	return "", nil // Return empty string if no prediction is available
 }
