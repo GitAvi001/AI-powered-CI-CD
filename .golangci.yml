@@ -1,0 +1,9 @@
+linters:
+  enable:
+    - gofmt #enbable fmt 
+    - golint #Enable linters for go
+    - errcheck #Enable error checking
+    - staticcheck
+linters-settings:
+  gofmt:
+    simplify: true
