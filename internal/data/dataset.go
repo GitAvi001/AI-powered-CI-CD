@@ -17,6 +17,8 @@ func LoadIrisDataset(*base.DenseInstances, error){
 	return data, nil
 }
 
+
+// Predict makes a prediction using the trained model.
 func TrainKNN(data *base.DenseInstances) *knn.KNNClassifier{
 	cls:=knn.NewKnnClassifier("euclidean", "linear", 3)
 	cls.Fit(data)
